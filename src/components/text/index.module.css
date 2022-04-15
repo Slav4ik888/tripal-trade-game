@@ -1,0 +1,16 @@
+
+.root {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+.strong {
+  font-weight: 600;
+}
+.italic {
+  font-style: italic;
+}
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
