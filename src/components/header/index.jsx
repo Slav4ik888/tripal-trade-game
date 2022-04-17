@@ -1,9 +1,9 @@
 import Container from '../container';
 import logo from '../../assets/logo_s.png';
-import s from './index.module.css';
+import s from './index.module.scss';
 
 
-const MENU = ['Menu 1', 'Menu 2', 'Menu 3', 'Menu 4'];
+const MENU = ["Menu 1", "Menu 2", "Menu 3", "Menu 4"];
 
 const Header = () => {
   return (

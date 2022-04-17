@@ -1,15 +1,20 @@
+import { useState } from 'react';
 import Heading from '../heading';
 import Container from '../container';
-
 import logoPng from '../../assets/logo.png';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import s from './index.module.css';
+import s from './index.module.scss';
 
+const bgStyle = {
+  background: `url(${logoPng}) center no-repeat`,
+};
+  
 
 const Slider = () => {
 
-  const bgStyle = {
-    background: `url(${logoPng}) center no-repeat`,
+  const [slide, setSlide] = useState(0);
+
+  const handleClick = () => {
+    setSlide(prev => ++prev);
   };
 
   return (
@@ -25,11 +30,10 @@ const Slider = () => {
           </Heading>
 
           <div className={s.image} style={bgStyle}>
-            {/* <img src={logoPng} alt="logo" /> */}
-            {/* <Logo /> */}
+            
           </div>
           <div className={s.call}>
-            <button className={s.button}>Wow</button>
+            <button className={s.button} onClick={handleClick}>Wow {slide}</button>
           </div>
         </Container>
       </div>
@@ -38,3 +42,8 @@ const Slider = () => {
 }
 
 export default Slider;
+
+// Это чтобы не забыть...
+// import { ReactComponent as Logo } from '../../assets/logo.svg';
+// <img src={logoPng} alt="logo" />
+// <Logo /> 
