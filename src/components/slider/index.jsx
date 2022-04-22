@@ -1,8 +1,13 @@
 import { useState } from 'react';
+// Components
 import Heading from '../heading';
 import Container from '../container';
+import Button from '../button';
+// Styles & Consts & Types
 import logoPng from '../../assets/logo.png';
 import s from './index.module.scss';
+import { btnType } from '../../utils/types';
+
 
 const bgStyle = {
   background: `url(${logoPng}) center no-repeat`,
@@ -11,11 +16,6 @@ const bgStyle = {
 
 const Slider = () => {
 
-  const [slide, setSlide] = useState(0);
-
-  const handleClick = () => {
-    setSlide(prev => ++prev);
-  };
 
   return (
     <section className={s.section}>
@@ -32,9 +32,7 @@ const Slider = () => {
           <div className={s.image} style={bgStyle}>
             
           </div>
-          <div className={s.call}>
-            <button className={s.button} onClick={handleClick}>Wow {slide}</button>
-          </div>
+          <Button type={btnType.forward} onClick={() => {}} />
         </Container>
       </div>
     </section>

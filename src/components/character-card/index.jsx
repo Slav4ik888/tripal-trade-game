@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React from 'react'
 import pt from 'prop-types';
 import cl from 'classnames';
+// Components
 import Heading from '../heading';
 import Text from '../text';
+// Styles
 import { ReactComponent as Like } from './assets/heart.svg';
 import s from './index.module.scss';
 
 
-function ChapterCard({ id, name, src, humanName, description, isLike, onLike }) {
+function CharacterCard({ id, name, src, humanName, description, isLike, onLike, onRead }) {
 
   const handleClick = () => {
     onLike(id);
   };
+
+  const handleRead = () => onRead(id);
+
 
   return (
     <div className={s.root}>
@@ -35,7 +40,7 @@ function ChapterCard({ id, name, src, humanName, description, isLike, onLike }) 
             <Like />
           </div>
           <div className={s.readBio}>
-            <a href="#">Read bio</a>
+            <a href="#" onClick={handleRead}>Read bio</a>
           </div>
         </div>
       </div>
@@ -43,18 +48,19 @@ function ChapterCard({ id, name, src, humanName, description, isLike, onLike }) 
   )
 };
 
-ChapterCard.defaultProps = {
+CharacterCard.defaultProps = {
   isLike: false
 };
 
-ChapterCard.propTypes = {
+CharacterCard.propTypes = {
   id          : pt.number.isRequired,
   name        : pt.string.isRequired,
   src         : pt.string.isRequired,
   humanName   : pt.string.isRequired,
   description : pt.string.isRequired,
   isLike      : pt.bool,
-  onLike      : pt.func.isRequired
+  onLike      : pt.func.isRequired,
+  onRead      : pt.func.isRequired
 };
 
-export default ChapterCard;
+export default CharacterCard;
