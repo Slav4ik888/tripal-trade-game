@@ -84,4 +84,4 @@ function App() {
 }
 
 export default App;
-// git add . && git commit -m "4 lesson" && git push -u origin lesson-4
+// git add . && git commit -m "4 lesson remove archive catalog" && git push -u origin lesson-4
