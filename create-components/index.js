@@ -1,41 +1,22 @@
 const
   fs         = require('fs'),
   { config } = require('./config.js'),
-  { getNamesByConfig } = require('./get-names-by-config/index.js');
+  { Type }   = require('./types.js'),
+  { getNamesByConfig } = require('./utils/get-names-by-config/index.js'),
+  { createComponents, createTests } = require('./creators/index.js');
 
 
-
-const { dirName, componentName } = getNamesByConfig(); // process.argv[2]
-console.log('dirName, componentName: ', dirName, componentName);
-
-  
-const createComponents = new Promise((resolve, reject) => {
-  const path = `./${dirName}`;
-  if (fs.existsSync(path)) return reject(`Component is exist`);
-  console.log(`Start create component:`, componentName);
-
-  fs.mkdir(path, { recursive: true }, (err) => {
-    if (err) reject();
-    else resolve(path);
-  });
-});
+const { dirName, componentName, filename } = getNamesByConfig(); // process.argv[2]
+console.log('dirName:', dirName);
+console.log('componentName:', componentName);
+console.log('filename:', filename);
 
 
-createComponents.then(async (dirPath) => {
-  await fs.writeFile(`${dirPath}/index.jsx`, config.template(componentName), (err) => {
-    if (err) Promise.reject(err);
-  });
+switch (config.type) {
+  case Type.component     : createComponents({ dirName, componentName }); break;
+  case Type.componentTest : createTests({ dirName, componentName, filename }); break;
 
-  return dirPath;
-})
-  .then(async (dirPath) => {
-    await fs.writeFile(`${dirPath}/index.module.scss`, ".root {\n\n};\n", (err) => {
-      if (err) Promise.reject(err);
-    });
-    console.log(`Finish create component`);
-  
-    return dirPath;
-  })
-  .catch(err => console.log(`Err:`, err));
+  default: console.log(`Uncorrect creator type`);
+}
 
 // node create-components/index.js

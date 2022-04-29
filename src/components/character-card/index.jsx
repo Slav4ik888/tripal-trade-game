@@ -11,11 +11,8 @@ import s from './index.module.scss';
 
 function CharacterCard({ id, name, src, humanName, description, isLike, onLike, onRead }) {
 
-  const handleClick = () => {
-    onLike(id);
-  };
-
-  const handleRead = () => onRead(id);
+  const handleClick = () => onLike && onLike(id);
+  const handleRead  = () => onRead && onRead(id);
 
 
   return (

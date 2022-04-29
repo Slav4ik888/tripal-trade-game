@@ -1,87 +1,25 @@
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 // Components
-import Container from './components/container';
-import Header from './components/header';
-import Slider from './components/slider';
-import Footer from './components/footer';
-import Heading from './components/heading';
-import CharacterCard from './components/character-card';
-import Biography from './pages/biography';
+import Layout from './components/layout';
+// Pages
+import { Biography, Main } from './pages';
 // Consts & Styles
-import { CHARACTERS } from './assets/characters.js';
-import s from './App.module.scss';
-
+import { Path } from './utils/types';
 
 
 function App() {
 
-  const [characters, setCharacters] = useState(CHARACTERS);
-
-
-  const [bioId, setBioId] = useState(null);
-
-  const handleRead = (id) => setBioId(id);
-  const handleBack = () => setBioId(null);
-
-  const handleLike = (id) => {
-    setCharacters(prev => prev.map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          isLike: !item.isLike
-        }
-      }
-      return item
-    }));
-  };
-
-  let content;
-  if (bioId) content = <Container>
-    <Biography id={bioId} onBackClick={handleBack} />
-  </Container>
-
-  else content = <>
-    <Slider />
-
-      <section className={s.cardSection}>
-        <Container>
-          <div className={s.cardTitle}>
-            <Heading backLine>
-              Marvel Cards
-            </Heading>
-            <Heading level={2}>
-              Collect your best five
-            </Heading>
-          </div>
-
-          <div className={s.cardWrap}>
-            {
-              characters?.map(item => <div key={item.id}>
-                <CharacterCard
-                  id          = {item.id}
-                  name        = {item.name}
-                  src         = {item.thumbnail.path}
-                  description = {item.description}
-                  humanName   = {item.humanName}
-                  isLike      = {item.isLike}
-                  onLike      = {handleLike}
-                  onRead      = {handleRead}
-                />
-              </div>)
-            }       
-          </div>
-        </Container>
-      </section>
-      <Footer />
-  </>
-
   return (
-    <div className="App">
-      <Header />
-      {content}
-    </div>
-  );
+    <Routes>
+      <Route path={Path.MAIN} element={<Layout />}>
+        <Route index element={<Main />} />
+        <Route path={Path.BIO_ID}  element={<Biography id={1011334} />} />
+      </Route>
+      {/* <Route path="/contacts" element={} /> */}
+    </Routes>
+  )
+  
 }
 
 export default App;
-// git add . && git commit -m "4 lesson remove archive catalog" && git push -u origin lesson-4
+// git checkout -b homework-5 && git add . && git commit -m "start homework-5" && git push -u origin homework-5
