@@ -5,8 +5,8 @@ const
 
 const config = {
   type: Type.component,
-  path: `src/components/layout`,
-  // path: `src/pages/main`,
+  // path: `src/components/layout`,
+  path: `src/pages/contacts`,
   template: template.component,
   // type: Type.componentTest,
   // path: `src/features/basket/ui/basket-product/__tests__`,

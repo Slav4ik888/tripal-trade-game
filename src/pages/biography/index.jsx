@@ -1,36 +1,25 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import pt from 'prop-types';
+import { useParams } from 'react-router-dom';
 import cn from 'classnames';
 // Components
 import Container from '../../components/container';
-import Button from '../../components/button';
 import Heading from '../../components/heading';
 import Text from '../../components/text';
 // Styles & Consts & Types
 import s from './index.module.scss';
 import { BIO } from '../../assets/bio';
-import { btnType, Path } from '../../utils/types';
 
 
 
-export const Biography = ({ onBackClick }) => {
+export const Biography = () => {
   const
     { id }   = useParams(),
-    navigate = useNavigate(),
-    content  = BIO[id];
-
-  const handleBackClick = () => {
-    onBackClick ? onBackClick() : navigate(Path.MAIN);
-  };
+    idx      = id || 1011334,
+    content  = BIO[idx];
 
   return (
     <div className={cn(s.root)}>
       <Container>
-        <div className={s.btnWrap}>
-          <Button type={btnType.back} onClick={handleBackClick}/>
-        </div>
-
         <div className={s.content}>
           {
             content?.map((item, idx) => {
@@ -48,10 +37,6 @@ export const Biography = ({ onBackClick }) => {
       </Container>
     </div>
   )
-};
-
-Biography.propTypes = {
-  onBackClick : pt.func
 };
 
 export default Biography;

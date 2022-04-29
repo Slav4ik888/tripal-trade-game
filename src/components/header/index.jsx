@@ -8,10 +8,10 @@ import s from './index.module.scss';
 
 
 const MENU = [
-  { label: "Main",   link: Path.MAIN },
-  { label: "Bio",    link: Path.BIO },
-  { label: "Menu 3", link: Path.MAIN },
-  { label: "Menu 4", link: Path.MAIN }
+  { label: "Main",       link: Path.MAIN },
+  { label: "Bio",        link: Path.BIO },
+  { label: "About game", link: Path.ABOUT_GAME },
+  { label: "Contacts",   link: Path.CONTACTS }
 ];
 
 
