@@ -1,8 +1,8 @@
 import Container from '../container';
-import s from './index.module.css';
+import s from './index.module.scss';
+
 
 const Footer = () => {
-
   return (
     <footer className={s.root}>
       <Container>

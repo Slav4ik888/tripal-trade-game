@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import s from './index.module.css';
+import s from './index.module.scss';
 
 
 const Text = ({ element, className, strong, disabled, italic, children }) => {
-
-  
 
   return React.createElement(element, {
     className: cn(
@@ -20,11 +18,11 @@ const Text = ({ element, className, strong, disabled, italic, children }) => {
 };
 
 Text.defaultProps = {
-  element: `div`
+  element: "div"
 };
 
 Text.propTypes = {
-  element   : PropTypes.oneOf([`div`, `p`, `span`]),
+  element   : PropTypes.oneOf(["div", "p", "span"]),
   className : PropTypes.string,
   disabled  : PropTypes.bool,
   strong    : PropTypes.bool,

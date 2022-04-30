@@ -1,16 +1,21 @@
+import { useState } from 'react';
+// Components
 import Heading from '../heading';
 import Container from '../container';
-
+import Button from '../button';
+// Styles & Consts & Types
 import logoPng from '../../assets/logo.png';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import s from './index.module.css';
+import s from './index.module.scss';
+import { btnType } from '../../utils/types';
 
+
+const bgStyle = {
+  background: `url(${logoPng}) center no-repeat`,
+};
+  
 
 const Slider = () => {
 
-  const bgStyle = {
-    background: `url(${logoPng}) center no-repeat`,
-  };
 
   return (
     <section className={s.section}>
@@ -25,12 +30,9 @@ const Slider = () => {
           </Heading>
 
           <div className={s.image} style={bgStyle}>
-            {/* <img src={logoPng} alt="logo" /> */}
-            {/* <Logo /> */}
+            
           </div>
-          <div className={s.call}>
-            <button className={s.button}>Wow</button>
-          </div>
+          <Button type={btnType.forward} onClick={() => {}} />
         </Container>
       </div>
     </section>
@@ -38,3 +40,8 @@ const Slider = () => {
 }
 
 export default Slider;
+
+// Это чтобы не забыть...
+// import { ReactComponent as Logo } from '../../assets/logo.svg';
+// <img src={logoPng} alt="logo" />
+// <Logo /> 

@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
 .header {
@@ -20,16 +21,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.header.small {
-  height: 60px;
-  box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.8);
+  
+  &.small {
+    height: 60px;
+    box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.8);
+  }
 }
 
 .logo {
   height: 70px;
   width: 125px;
+  cursor: pointer;
 }
 
 .nav {
@@ -68,3 +70,6 @@
   font-size: 16px;
 }
 
+.nav li a.active {
+  color: red;
+}
