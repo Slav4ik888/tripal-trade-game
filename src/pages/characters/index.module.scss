@@ -1,5 +1,6 @@
 .cardSection {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   padding: 24px 0;
   background: #f7f7f7;
@@ -13,5 +14,7 @@
 .cardWrap {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 32px;
+  column-gap: 24px;
   margin-bottom: 12px;
 }

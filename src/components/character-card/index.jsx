@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import { Path } from '../../utils/types';
 import pt from 'prop-types';
 import cl from 'classnames';
 // Components
@@ -9,10 +11,9 @@ import { ReactComponent as Like } from './assets/heart.svg';
 import s from './index.module.scss';
 
 
-function CharacterCard({ id, name, src, humanName, description, isLike, onLike, onRead }) {
+function CharacterCard({ id, name, src, humanName, description, isLike, onLike }) {
 
   const handleClick = () => onLike && onLike(id);
-  const handleRead  = () => onRead && onRead(id);
 
 
   return (
@@ -37,7 +38,7 @@ function CharacterCard({ id, name, src, humanName, description, isLike, onLike, 
             <Like />
           </div>
           <div className={s.readBio}>
-            <a href="#" onClick={handleRead}>Read bio</a>
+            <Link to={`/${Path.CHARACTERS}/${id}`}>Read bio</Link>
           </div>
         </div>
       </div>
@@ -56,8 +57,7 @@ CharacterCard.propTypes = {
   humanName   : pt.string.isRequired,
   description : pt.string.isRequired,
   isLike      : pt.bool,
-  onLike      : pt.func.isRequired,
-  onRead      : pt.func.isRequired
+  onLike      : pt.func.isRequired
 };
 
 export default CharacterCard;
