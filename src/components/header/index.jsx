@@ -21,7 +21,7 @@ const Header = () => {
     navigate = useNavigate();
 
   useEffect(() => {
-    const scrollFunc = () => window.pageYOffset >= 60 ? setSmall(true) : setSmall(false);
+    const scrollFunc = () => setSmall(window.pageYOffset >= 60);
     window.addEventListener(`scroll`, scrollFunc);
 
     return (() => window.removeEventListener(window, scrollFunc));

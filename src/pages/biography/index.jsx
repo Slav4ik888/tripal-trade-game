@@ -1,5 +1,5 @@
-import React from 'react';
-import { useNavigate, useParams, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams, Navigate, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 // Components
 import Heading from '../../components/heading';
@@ -7,6 +7,7 @@ import Button from '../../components/button';
 import Text from '../../components/text';
 // Styles & Consts & Types
 import s from './index.module.scss';
+import { ReactComponent as Anchor } from '../../assets/anchor.svg';
 import { BIO } from '../../assets/bio';
 import { btnType, Path } from '../../utils/types';
 
@@ -14,14 +15,35 @@ import { btnType, Path } from '../../utils/types';
 export const Biography = () => {
   const
     navigate = useNavigate(),
+    location = useLocation(),
     { id }   = useParams(),
     content  = BIO[id];
+
+  
+  useEffect(() => {
+    let anchorId = document.getElementById(location.hash.slice(1));
+  
+    if (anchorId) {
+      anchorId.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center' // , center, end или nearest.
+      });
+    }
+  }, []);
 
   const handleBack = () => navigate(`/`, {
     state: {
       from: id
     }
   });
+
+  const handleAnchor = (e) => {
+    const id = e.target.id;
+    id && navigate(`${location.pathname}#${id}`);
+  };
+
+  const makeId = (item) => item?.text?.toLowerCase().replace(/\s/g, `-`) || '';
+
 
   if (!content) return <Navigate to={`/${Path.CHARACTERS}`} replace />
 
@@ -34,8 +56,15 @@ export const Biography = () => {
         {
           content.map((item, idx) => {
             switch (item.type) {
-              case `h1`        : return <Heading key={idx} children={item.text.toUpperCase()} />;
-              case `h2`        : return <Heading key={idx} level={2} children={item.text.toUpperCase()} />;
+              case `h1`: return <Heading key={idx} children={item.text.toUpperCase()} />;
+
+              case `h2`: return <Heading key={idx} level={2} children={
+                <div id={makeId(item)} onClick={handleAnchor}  className={s.anchor}>
+                  {`${item.text.toUpperCase()} `}
+                  <Anchor />
+                </div>}
+              />
+
               case `paragraph` : return <Text key={idx} children={item.text} />;
               case `img`       : return <div key={idx} className={s.imgWrap}><img src={item.src} alt="" className={s.img} /></div>
               

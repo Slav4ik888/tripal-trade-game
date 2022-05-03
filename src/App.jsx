@@ -25,5 +25,5 @@ function App() {
 }
 
 export default App;
-// git checkout -b homework-5 && 
-// git add . && git commit -m "start homework-6" && git push -u origin homework-5
+// git checkout -b homework-6 && 
+// git add . && git commit -m "end homework-6" && git push -u origin homework-6

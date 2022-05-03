@@ -21,3 +21,27 @@
 .img {
   max-width: 100%;
 }
+
+.anchor {
+  cursor: pointer;
+
+  svg {
+    opacity: .1;
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s;
+
+    path[id="Livello_1"] {
+      fill: rgba(0, 0, 0, 0);
+    }
+  }
+  
+  &:hover {
+    svg {
+      opacity: 1;
+      path[id="Livello_1"] {
+        fill: #FF1D25;
+      }
+    }
+  }
+}
