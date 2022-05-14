@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import cn from 'classnames';
-import Container from '../container';
-import logo from '../../assets/logo_s.png';
+import { NavLink } from 'react-router-dom';
 import { Path } from '../../utils/types';
+// Components
+import Container from '../container';
+import Logo from '../btns/logo';
+// Styles
+import cn from 'classnames';
 import s from './index.module.scss';
 
 
@@ -16,9 +18,7 @@ const MENU = [
 
 
 const Header = () => {
-  const
-    [small, setSmall] = useState(false),
-    navigate = useNavigate();
+  const [small, setSmall] = useState(false);
 
   useEffect(() => {
     const scrollFunc = () => setSmall(window.pageYOffset >= 60);
@@ -27,12 +27,11 @@ const Header = () => {
     return (() => window.removeEventListener(window, scrollFunc));
   }, []);
 
-  const handleLogoClick = () => navigate(Path.MAIN)
   return (
     <header className={s.root}>
       <div className={cn(s.header, {[s.small]: small})}>
         <Container className={s.headerWrap}>
-          <img src={logo} alt="logo" className={s.logo} onClick={handleLogoClick} />
+          <Logo styles={{ logo: s.logo }} />
           <ul className={s.nav}>
             {
               MENU.map(item => <li key={item.label}>

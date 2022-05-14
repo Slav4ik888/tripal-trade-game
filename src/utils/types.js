@@ -5,6 +5,7 @@ export const btnType = {
 
 export const Path = {
   MAIN          : `/`,
+  LOGIN         : `login`,
   // BIO           : `bio`,
   // BIO_ID        : `bio/:id`,
   CHARACTERS    : `characters`,

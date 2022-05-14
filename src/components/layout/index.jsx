@@ -4,12 +4,14 @@ import Header from '../header';
 import Container from '../container';
 import Footer from '../footer';
 import s from './index.module.scss';
+import { Path } from '../../utils/types';
 
 
 const Layout = () => {
   const
-    match = useMatch({ path: `/` }),
-    location = useLocation(),
+    match           = useMatch({ path: `/` }),
+    location        = useLocation(),
+    showHeader      = location.pathname.slice(1) !== Path.LOGIN,
     [path, setPath] = useState(location.pathname);
   
   useEffect(() => {
@@ -26,9 +28,12 @@ const Layout = () => {
     }
   }, [location.pathname]);
 
+
   return (
     <>
-      <Header />
+      {
+        showHeader && <Header />
+      }
       {
         match !== null ? <Outlet /> : (
           <Container className={s.container}>

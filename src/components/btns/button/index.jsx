@@ -2,7 +2,7 @@ import React from 'react';
 import pt from 'prop-types';
 import cn from 'classnames';
 import s from './index.module.scss';
-import { btnType } from '../../utils/types';
+import { btnType } from '../../../utils/types';
 
 
 const Button = ({ type, onClick }) => {

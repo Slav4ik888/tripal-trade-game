@@ -8,7 +8,7 @@ import s from './index.module.scss';
 import { CHARACTERS } from '../../assets/characters.js';
 
 
-export const Characters = () => {
+export const CharactersPage = () => {
   const
     match    = useMatch({ path: `/` }),
     location = useLocation(),
@@ -62,4 +62,4 @@ export const Characters = () => {
   )
 };
 
-export default Characters;
+export default CharactersPage;
