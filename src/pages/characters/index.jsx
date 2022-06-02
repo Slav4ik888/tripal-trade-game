@@ -1,30 +1,18 @@
-import React, { useState } from 'react';
-import { useMatch, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useMatch } from 'react-router-dom';
 // Components
 import Heading from '../../components/heading';
 import CharacterCard from '../../components/character-card';
 // Consts & Styles
 import s from './index.module.scss';
-import { CHARACTERS } from '../../assets/characters.js';
+import { CharactersContext } from '../../components/context';
 
 
 export const CharactersPage = () => {
   const
-    match    = useMatch({ path: `/` }),
-    location = useLocation(),
-    [characters, setCharacters] = useState(CHARACTERS);
+    match = useMatch({ path: `/` }),
+    { characters, onLike } = useContext(CharactersContext);
   
-  const handleLike = (id) => {
-    setCharacters(prev => prev.map(item => {
-      if (item.id === id) {
-        return {
-          ...item,
-          isLike: !item.isLike
-        }
-      }
-      return item
-    }));
-  };
 
   return (
     <section className={s.cardSection}>
@@ -53,7 +41,7 @@ export const CharactersPage = () => {
               description = {item.description}
               humanName   = {item.humanName}
               isLike      = {item.isLike}
-              onLike      = {handleLike}
+              onLike      = {onLike}
             />
           </div>)
         }
