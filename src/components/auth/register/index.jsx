@@ -2,16 +2,19 @@ import React from 'react';
 import pt from 'prop-types';
 import { ReactComponent as Pen } from '../../../assets/icon-pen.svg';
 import cn from 'classnames';
+import { Input } from '../../input';
+import Button from '../../btns/button';
+import { Form } from '../form';
+import { btnType } from '../../../utils/types';
 
 
-export const Register = ({ active, styles: s, form, onSetForm, onChange, onToggle, onSubmit }) => {
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (form.password !== form.repeatPassword) {
-      onSetForm(prev => ({ ...prev, errors: { repeatPassword: `Отличается от пароля` }}))
-    }
-    else onSubmit()
+
+export const Register = ({ active, styles: s, form, onChange, onToggle, onSubmit }) => {
+
+  const inputStyle = {
+    root  : s.inputContainer,
+    valid : s.valid,
+    error : s.bar
   };
 
   return (
@@ -20,49 +23,48 @@ export const Register = ({ active, styles: s, form, onSetForm, onChange, onToggl
         <Pen />
       </div>
       <h1 className={s.title}>Register
-        <div className={s.close} onClick={onToggle}></div>
+        <div className={s.close} onClick={onToggle} />
       </h1>
-      <form onSubmit={handleSubmit}>
-        <div className={s.inputContainer}>
-          <input 
-            id       = "#signup-email" 
-            type     = "email"
-            name     = "email"
-            value    = {form.email}
-            required = "required"
-            onChange = {onChange}
-          />
-          <label htmlFor="#signup-email">Email</label>
-          <div className={s.bar}>{form.errors?.email}</div>
-        </div>
-        <div className={s.inputContainer}>
-          <input 
-            id       = "#signup-password" 
-            type     = "password" 
-            name     = "password"
-            value    = {form.password}
-            required = "required"
-            onChange = {onChange}
-          />
-          <label htmlFor="#signup-password">Password</label>
-          <div className={s.bar}>{form.errors?.password}</div>
-        </div>
-        <div className={s.inputContainer}>
-          <input 
-            id       = "#signup-repeat-password" 
-            type     = "password" 
-            name     = "repeatPassword"
-            value    = {form.repeatPassword}
-            required = "required"
-            onChange = {onChange}
-          />
-          <label htmlFor="#signup-repeat-password">Repeat Password</label>
-          <div className={s.bar}>{form.errors?.repeatPassword}</div>
-        </div>
-        <div className={s.buttonContainer}>
-          <button type='submit'><span>Register</span></button>
-        </div>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Input
+          id       = "signup-email"
+          type     = "email"
+          name     = "email"
+          label    = "Email"
+          value    = {form.email}
+          error    = {form.errors?.email}
+          styles   = {inputStyle}
+          onChange = {onChange}
+        />
+        <Input
+          id       = "signup-password"
+          type     = "password"
+          name     = "password"
+          label    = "Password"
+          value    = {form.password}
+          error    = {form.errors?.password}
+          styles   = {inputStyle}
+          onChange = {onChange}
+        />
+        <Input
+          id       = "signup-repeat-password"
+          type     = "password"
+          name     = "repeatPassword"
+          label    = "Repeat Password"
+          value    = {form.repeatPassword}
+          error    = {form.errors?.repeatPassword}
+          styles   = {inputStyle}
+          onChange = {onChange}
+        />
+        
+        <Button
+          typeBtn = {btnType.redToggle}
+          type    = 'submit'
+          styles  = {{ root: s.buttonContainer }}
+        >
+          Register
+        </Button>
+      </Form>
     </>
   );
 };

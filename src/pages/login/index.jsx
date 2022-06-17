@@ -22,6 +22,12 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     console.log('Form: ', form);
+
+    if (form.password !== form.repeatPassword) {
+      console.log(`Form is invalid nah!`);
+      setForm(prev => ({ ...prev, errors: { repeatPassword: `Отличается от пароля` }}))
+    }
+    else console.log(`Form is valid!`);
   };
 
 
@@ -30,7 +36,7 @@ export const LoginPage = () => {
       <Logo styles={{ wrap: s.headerLogo }} />
 
       <div className={cn(s.container, { [s.active]: active })}>
-        <div className={s.card}></div>
+        <div className={s.card} />
         
         <div className={s.card}>
           <Login

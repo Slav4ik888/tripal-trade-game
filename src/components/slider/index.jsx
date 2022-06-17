@@ -32,7 +32,9 @@ const Slider = () => {
           <div className={s.image} style={bgStyle}>
             
           </div>
-          <Button type={btnType.forward} onClick={() => {}} />
+          <Button typeBtn={btnType.white} onClick={() => { }}>
+            Wow
+          </Button>
         </Container>
       </div>
     </section>

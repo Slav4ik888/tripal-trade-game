@@ -38,9 +38,9 @@ export const BiographyPage = () => {
 
   return (
     <div className={cn(s.root)}>
-      <div>
-        <Button type={btnType.back} onClick={handleBack} />
-      </div>
+      <Button typeBtn={btnType.black} onClick={handleBack}>
+        Go back
+      </Button>
       <div className={s.content}>
         {
           content.map((item, idx) => {

@@ -5,25 +5,43 @@ import s from './index.module.scss';
 import { btnType } from '../../../utils/types';
 
 
-const Button = ({ type, onClick }) => {
-  const forward = type === btnType.forward;
+
+const Button = ({ typeBtn, type, fullWidth, children, onClick, styles }) => {
+
+  const handleClick = () => onClick && onClick();
 
   return (
-    <div className={cn(s.root, { [s.black]: !forward, [s.white]: forward })}>
+    <div className={cn(s.root, styles?.root, { [s.fullWidth]: fullWidth })}>
       <button
-        className={cn(s.button, { [s.btnBlack]: !forward, [s.btnWhite]: forward })}
-        onClick={onClick}
+        className = {cn(s.button, {
+          [s.btnWhite]     : typeBtn === btnType.white,
+          [s.btnBlack]     : typeBtn === btnType.black,
+          [s.btnRed]       : typeBtn === btnType.red,
+          [s.btnRedToggle] : typeBtn === btnType.redToggle,
+        })}
+        type    = {type}
+        onClick = {handleClick}
       >
-        {type}
+        <span>{children}</span>
       </button>
     </div>
   )
 };
 
 
+Button.defaultProps = {
+  fullWidth : false,
+  type      : `button`
+};
+
+
 Button.propTypes = {
-  type    : pt.oneOf([btnType.forward, btnType.back]).isRequired,
-  onClick : pt.func.isRequired
+  type      : pt.oneOf(['button', 'submit', 'reset']),
+  typeBtn   : pt.oneOf([btnType.white, btnType.black, btnType.red, btnType.redToggle]).isRequired,
+  fullWidth : pt.bool,
+  children  : pt.oneOfType([pt.node, pt.string]).isRequired,
+  styles    : pt.shape({ root: pt.string, button: pt.string }),
+  onClick   : pt.func
 };
 
 export default Button;

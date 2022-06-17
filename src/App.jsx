@@ -50,4 +50,4 @@ function App() {
 
 export default App;
 // git checkout -b homework-6 && 
-// git add . && git commit -m "end homework-6" && git push -u origin homework-6
+// git add . && git commit -m "end work-shop" && git push -u origin work-shop

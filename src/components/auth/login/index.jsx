@@ -1,46 +1,53 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Input } from '../../input';
 import pt from 'prop-types';
+import Button from '../../btns/button';
+import { Form } from '../form';
+import { btnType } from '../../../utils/types';
+
 
 
 export const Login = ({ styles: s, form, onChange, onSubmit }) => {
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit();
+  const inputStyle = {
+    root  : s.inputContainer,
+    valid : s.valid,
+    error : s.bar
   };
 
   return (
     <>
       <h1 className={s.title}>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div className={s.inputContainer}>
-          <input
-            id       = "#email"
-            type     = "email"
-            name     = "email"
-            value    = {form.email}
-            required = "required"
-            onChange = {onChange}
-          />
-          <label htmlFor="#email">Email</label>
-          <div className={s.bar}>{form.errors?.email}</div>
-        </div>
-        <div className={s.inputContainer}>
-          <input
-            id       = "#password"
-            type     = "password"
-            name     = "password"
-            value    = {form.password}
-            required = "required"
-            onChange = {onChange}
-          />
-          <label htmlFor="#password">Password</label>
-          <div className={s.bar}>{form.errors.password}</div>
-        </div>
-        <div className={s.buttonContainer}>
-          <button type='submit'><span>Go</span></button>
-        </div>
-      </form>
+      <Form onSubmit={onSubmit}>
+        <Input
+          id       = "email"
+          type     = "email"
+          name     = "email"
+          label    = "Email"
+          value    = {form.email}
+          error    = {form.errors?.email}
+          styles   = {inputStyle}
+          onChange = {onChange}
+        />
+        <Input
+          id       = "password"
+          type     = "password"
+          name     = "password"
+          label    = "Password"
+          value    = {form.password}
+          error    = {form.errors?.password}
+          styles   = {inputStyle}
+          onChange = {onChange}
+        />
+        
+        <Button
+          typeBtn = {btnType.red}
+          type    = 'submit'
+          styles  = {{ root: s.buttonContainer }}
+        >
+          Go
+        </Button>
+      </Form>
     </>
   );
 };
