@@ -1,10 +1,14 @@
 export const btnType = {
-  forward : `Wow`,
-  back    : `Go Back`
+  black     : `black`,
+  white     : `white`,
+  red       : `red`,
+  redToggle : `redToggle`
 };
+
 
 export const Path = {
   MAIN          : `/`,
+  LOGIN         : `login`,
   // BIO           : `bio`,
   // BIO_ID        : `bio/:id`,
   CHARACTERS    : `characters`,

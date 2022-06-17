@@ -2,7 +2,7 @@ import { useState } from 'react';
 // Components
 import Heading from '../heading';
 import Container from '../container';
-import Button from '../button';
+import Button from '../btns/button';
 // Styles & Consts & Types
 import logoPng from '../../assets/logo.png';
 import s from './index.module.scss';
@@ -32,7 +32,9 @@ const Slider = () => {
           <div className={s.image} style={bgStyle}>
             
           </div>
-          <Button type={btnType.forward} onClick={() => {}} />
+          <Button typeBtn={btnType.white} onClick={() => { }}>
+            Wow
+          </Button>
         </Container>
       </div>
     </section>

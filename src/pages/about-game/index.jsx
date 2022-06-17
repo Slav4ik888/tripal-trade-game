@@ -1,9 +1,8 @@
 import React from 'react';
-import Container from '../../components/container';
 import Text from '../../components/text';
 
 
-export const AboutGame = () => (
+export const AboutGamePage = () => (
   <>
     <Text children="Triple Triad is played on a blank 3-by-3 square game board. Squall plays against one opponent at a time in turn-based gameplay. Both players have five cards in their hand at the start of the game. The absolute simplest explanation of the game is that it plays like the card game, WAR. A number on one player's card will be played against a number on the other player's card. The high number wins the turn." />
     <Text children="Each player is assigned a color at the start of the game, either red or blue. One player's cards will have a red background. The other player's cards will be blue. This is done to indicate both initial ownership of the card, and points as the game continues to progress. Each card of the player's color on the grid is a point. As cards are played and adjacent sides compared, they may change colors to show which player has won the turn and is currently winning the game." />

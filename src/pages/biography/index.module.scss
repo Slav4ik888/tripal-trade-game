@@ -26,10 +26,10 @@
   cursor: pointer;
 
   svg {
-    opacity: .1;
-    width: 20px;
-    height: 20px;
-    transition: all 0.3s;
+    opacity: 0;
+    width: .7em;
+    height: .7em;
+    transition: opacity 0.3s ease-in-out;
 
     path[id="Livello_1"] {
       fill: rgba(0, 0, 0, 0);
@@ -38,10 +38,15 @@
   
   &:hover {
     svg {
-      opacity: 1;
+      opacity: .8;
       path[id="Livello_1"] {
         fill: #FF1D25;
       }
     }
   }
+}
+// Button
+.btnBlack {
+  border: 1px solid black;
+  color: black;
 }

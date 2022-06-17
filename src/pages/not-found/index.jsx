@@ -3,7 +3,7 @@ import Heading from '../../components/heading';
 import s from './index.module.scss';
 
 
-const NotFound = () => {
+export const NotFoundPage = () => {
 
   return (
     <div className={s.root}>
@@ -11,5 +11,3 @@ const NotFound = () => {
     </div>
   )
 };
-
-export default NotFound;

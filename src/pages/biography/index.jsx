@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams, Navigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useParams, Navigate, useLocation } from 'react-router-dom';
 import cn from 'classnames';
 // Components
 import Heading from '../../components/heading';
-import Button from '../../components/button';
+import Button from '../../components/btns/button';
 import Text from '../../components/text';
 // Styles & Consts & Types
 import s from './index.module.scss';
@@ -12,7 +12,7 @@ import { BIO } from '../../assets/bio';
 import { btnType, Path } from '../../utils/types';
 
 
-export const Biography = () => {
+export const BiographyPage = () => {
   const
     navigate = useNavigate(),
     location = useLocation(),
@@ -20,17 +20,6 @@ export const Biography = () => {
     content  = BIO[id];
 
   
-  useEffect(() => {
-    let anchorId = document.getElementById(location.hash.slice(1));
-  
-    if (anchorId) {
-      anchorId.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center' // , center, end или nearest.
-      });
-    }
-  }, []);
-
   const handleBack = () => navigate(`/`, {
     state: {
       from: id
@@ -49,20 +38,36 @@ export const Biography = () => {
 
   return (
     <div className={cn(s.root)}>
-      <div>
-        <Button type={btnType.back} onClick={handleBack} />
-      </div>
+      <Button typeBtn={btnType.black} onClick={handleBack}>
+        Go back
+      </Button>
       <div className={s.content}>
         {
           content.map((item, idx) => {
             switch (item.type) {
-              case `h1`: return <Heading key={idx} children={item.text.toUpperCase()} />;
+              case `h1`: return <Heading
+                key={idx}
+                id={makeId(item)} 
+                onClick={handleAnchor}
+                children={
+                  <Link to={`#${makeId(item)}`} className={s.anchor}>
+                    {`${item.text.toUpperCase()} `}
+                    <Anchor />
+                  </Link>
+                }
+              />;
 
-              case `h2`: return <Heading key={idx} level={2} children={
-                <div id={makeId(item)} onClick={handleAnchor}  className={s.anchor}>
-                  {`${item.text.toUpperCase()} `}
-                  <Anchor />
-                </div>}
+              case `h2`: return <Heading
+                key={idx}
+                id={makeId(item)}
+                level={2}
+                onClick={handleAnchor}
+                children={
+                  <Link to={`#${makeId(item)}`}  className={s.anchor}>
+                    {`${item.text.toUpperCase()} `}
+                    <Anchor />
+                  </Link>
+                }
               />
 
               case `paragraph` : return <Text key={idx} children={item.text} />;
@@ -76,5 +81,3 @@ export const Biography = () => {
     </div>
   )
 };
-
-export default Biography;

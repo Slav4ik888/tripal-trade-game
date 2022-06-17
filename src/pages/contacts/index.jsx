@@ -4,7 +4,7 @@ import photo from '../../assets/slava.jpeg';
 import s from './index.module.scss';
 
 
-export const Contacts = () => {
+export const ContactsPage = () => {
 
   return (
     <div className={s.root}>
@@ -13,5 +13,3 @@ export const Contacts = () => {
     </div>
   )
 };
-
-export default Contacts;
