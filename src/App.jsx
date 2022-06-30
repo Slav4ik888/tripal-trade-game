@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { AuthContext, RequireAuth } from './components/auth/context';
 // Components
 import Layout from './components/layout';
 // Pages
@@ -35,15 +36,16 @@ function App() {
 
   return (
     <Routes>
-      <Route path={Path.MAIN} element={<Layout />}>
+      <Route path={Path.MAIN} element={<RequireAuth><Layout /></RequireAuth>}>
         <Route index                     element={<MainPage />} />
-        <Route path={Path.LOGIN}         element={<LoginPage />} />
         <Route path={Path.CHARACTERS}    element={<CharactersPage />} />
         <Route path={Path.CHARACTERS_ID} element={<BiographyPage />} />
         <Route path={Path.ABOUT_GAME}    element={<AboutGamePage />} />
         <Route path={Path.CONTACTS}      element={<ContactsPage />} />
         <Route path="*"                  element={<NotFoundPage />} />
       </Route>
+      
+      <Route path={Path.LOGIN}         element={<LoginPage />} />
     </Routes>
   )
 }

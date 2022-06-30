@@ -1,33 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Login } from '../../components/auth/login';
 import { Register } from '../../components/auth/register';
 import Logo from '../../components/btns/logo';
 import cn from 'classnames';
 import s from './index.module.scss';
+import { useAuth } from '../../components/auth/context';
+import { Path } from '../../utils/types';
+import { useMemo } from 'react';
+
+const initState = {
+  email          : ``,
+  password       : ``,
+  repeatPassword : ``,
+  errors         : {}
+};
 
 
 export const LoginPage = () => {
-  const [active, setActive] = useState(false);
-  const [form, setForm] = useState({
-    email          : ``,
-    password       : ``,
-    repeatPassword : ``,
-    errors         : {}
-  });
-
-  const handleToggle = () => setActive(prev => !prev);
+  const
+    auth                  = useAuth(),
+    [loading, setLoading] = useState(false),
+    [active, setActive]   = useState(false),
+    [form, setForm]       = useState(() => ({ ...initState })),
+    navigate              = useNavigate(),
+    location              = useLocation(),
+    pathState             = useMemo(() => location.state?.from, [location.state]);
   
-  const handleChange = (e) =>
-    setForm(prev => ({ ...prev, errors: {}, [e.target.name]: e.target.value }));
+  
+  useEffect(() => { auth.user !== null && navigate(pathState); }, []);
+  
+  const handlerToggle = () => setActive(prev => !prev);
+  const handlerChange = (obj) => setForm(prev => ({ ...prev, errors: {}, ...obj }));
 
-  const handleSubmit = (e) => {
-    console.log('Form: ', form);
+  const handlerSubmit = () => {
+    setLoading(true);
+    setTimeout(() => {
+      if (active) auth.register(form);
+      else auth.login(form, () => pathState ? navigate(pathState) : navigate(Path.MAIN));
 
-    if (form.password !== form.repeatPassword) {
-      console.log(`Form is invalid nah!`);
-      setForm(prev => ({ ...prev, errors: { repeatPassword: `Отличается от пароля` }}))
-    }
-    else console.log(`Form is valid!`);
+      setLoading(false);
+      setForm({ ...initState });
+    }, 2000);
   };
 
 
@@ -40,22 +54,24 @@ export const LoginPage = () => {
         
         <div className={s.card}>
           <Login
+            loading  = {loading}
             styles   = {s}
             form     = {form}
-            onChange = {handleChange}
-            onSubmit = {handleSubmit}
+            onChange = {handlerChange}
+            onSubmit = {handlerSubmit}
           />
         </div>
 
         <div className={cn(s.card, s.alt)}>
           <Register
+            loading  = {loading}
             styles    = {s}
             active    = {active}
             form      = {form}
             onSetForm = {setForm}
-            onToggle  = {handleToggle}
-            onChange  = {handleChange}
-            onSubmit  = {handleSubmit}
+            onToggle  = {handlerToggle}
+            onChange  = {handlerChange}
+            onSubmit  = {handlerSubmit}
           />
         </div>
       </div>

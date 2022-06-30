@@ -9,7 +9,18 @@ import { btnType } from '../../../utils/types';
 
 
 
-export const Register = ({ active, styles: s, form, onChange, onToggle, onSubmit }) => {
+export const Register = ({ loading, active, styles: s, form, onChange, onSetForm, onToggle, onSubmit }) => {
+
+  const handleSubmit = (e) => {
+
+    if (form.password !== form.repeatPassword) {
+      console.log(`Form is invalid nah!`, form);
+      onSetForm(prev => ({ ...prev, errors: { repeatPassword: `Отличается от пароля` } }))
+    }
+    else {
+      onSubmit && onSubmit();
+    }
+  };
 
   const inputStyle = {
     root  : s.inputContainer,
@@ -25,42 +36,43 @@ export const Register = ({ active, styles: s, form, onChange, onToggle, onSubmit
       <h1 className={s.title}>Register
         <div className={s.close} onClick={onToggle} />
       </h1>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Input
-          id       = "signup-email"
-          type     = "email"
-          name     = "email"
-          label    = "Email"
-          value    = {form.email}
-          error    = {form.errors?.email}
-          styles   = {inputStyle}
-          onChange = {onChange}
+          id           = "signup-email"
+          type         = "email"
+          name         = "email"
+          label        = "Email"
+          defaultValue = {form.email}
+          error        = {form.errors?.email}
+          styles       = {inputStyle}
+          onChange     = {onChange}
         />
         <Input
-          id       = "signup-password"
-          type     = "password"
-          name     = "password"
-          label    = "Password"
-          value    = {form.password}
-          error    = {form.errors?.password}
-          styles   = {inputStyle}
-          onChange = {onChange}
+          id           = "signup-password"
+          type         = "password"
+          name         = "password"
+          label        = "Password"
+          defaultValue = {form.password}
+          error        = {form.errors?.password}
+          styles       = {inputStyle}
+          onChange     = {onChange}
         />
         <Input
-          id       = "signup-repeat-password"
-          type     = "password"
-          name     = "repeatPassword"
-          label    = "Repeat Password"
-          value    = {form.repeatPassword}
-          error    = {form.errors?.repeatPassword}
-          styles   = {inputStyle}
-          onChange = {onChange}
+          id           = "signup-repeat-password"
+          type         = "password"
+          name         = "repeatPassword"
+          label        = "Repeat Password"
+          defaultValue = {form.repeatPassword}
+          error        = {form.errors?.repeatPassword}
+          styles       = {inputStyle}
+          onChange     = {onChange}
         />
         
         <Button
-          typeBtn = {btnType.redToggle}
-          type    = 'submit'
-          styles  = {{ root: s.buttonContainer }}
+          typeBtn  = {btnType.redToggle}
+          type     = 'submit'
+          disabled = {loading}
+          styles   = {{ root: s.buttonContainer }}
         >
           Register
         </Button>
@@ -70,6 +82,7 @@ export const Register = ({ active, styles: s, form, onChange, onToggle, onSubmit
 };
 
 Register.propTypes = {
+  loading   : pt.bool.isRequired,
   active    : pt.bool.isRequired,
   styles    : pt.shape().isRequired,
   form      : pt.shape({

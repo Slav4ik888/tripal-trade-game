@@ -45,9 +45,22 @@ export const getStorageData = (storageName) => {
   return data;
 };
 
+
+
+export const removeStorageData = (storageName) => {
+  if (checkError(storageName, `"Имя хранилища"`)) return;
+
+  localStorage.removeItem(PREFIX + storageName);
+};
+
+
 export const names = {
-  charactersLikes: `charactersLikes`
+  charactersLikes: `charactersLikes`,
+  auth: `auth`
 };
 
 export const setCharactersLikes = (charactersLikes) => setStorageData(names.charactersLikes, charactersLikes);
 export const getCharactersLikes = () => getStorageData(names.charactersLikes);
+export const setAuth = (email) => setStorageData(names.auth, email);
+export const getAuth = () => getStorageData(names.auth);
+export const clearAuth = () => removeStorageData(names.auth);

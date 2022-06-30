@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { useMatch } from 'react-router-dom';
 // Components
 import Heading from '../../components/heading';
-import CharacterCard from '../../components/character-card';
+import CharacterCard from '../../components/characters/character-card';
 // Consts & Styles
 import s from './index.module.scss';
-import { CharactersContext } from '../../components/context';
+import { CharactersContext } from '../../components/characters/context';
 
 
 export const CharactersPage = () => {

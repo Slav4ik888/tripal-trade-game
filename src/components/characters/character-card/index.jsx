@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Path } from '../../utils/types';
+import { Path } from '../../../utils/types';
 import pt from 'prop-types';
 import cl from 'classnames';
 // Components
-import Heading from '../heading';
-import Text from '../text';
+import Heading from '../../heading';
+import Text from '../../text';
 // Styles
 import { ReactComponent as Like } from './assets/heart.svg';
 import s from './index.module.scss';

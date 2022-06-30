@@ -7,6 +7,7 @@ import Logo from '../btns/logo';
 // Styles
 import cn from 'classnames';
 import s from './index.module.scss';
+import { useAuth } from '../auth/context';
 
 
 const MENU = [
@@ -19,6 +20,7 @@ const MENU = [
 
 const Header = () => {
   const [small, setSmall] = useState(false);
+  const auth = useAuth();
 
   useEffect(() => {
     const scrollFunc = () => setSmall(window.pageYOffset >= 60);
@@ -42,6 +44,9 @@ const Header = () => {
                   {item.label}
                 </NavLink>
               </li>)
+            }
+            {
+              auth.user && <li onClick={auth.logout}><span>Logout</span></li>
             }
           </ul>
         </Container>

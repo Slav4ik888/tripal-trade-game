@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Input } from '../../input';
 import pt from 'prop-types';
 import Button from '../../btns/button';
@@ -7,7 +7,11 @@ import { btnType } from '../../../utils/types';
 
 
 
-export const Login = ({ styles: s, form, onChange, onSubmit }) => {
+export const Login = ({ loading, styles: s, form, onChange, onSubmit }) => {
+
+  const handleSubmit = (e) => {
+    onSubmit && onSubmit();
+  };
   
   const inputStyle = {
     root  : s.inputContainer,
@@ -18,32 +22,33 @@ export const Login = ({ styles: s, form, onChange, onSubmit }) => {
   return (
     <>
       <h1 className={s.title}>Login</h1>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={handleSubmit}>
         <Input
-          id       = "email"
-          type     = "email"
-          name     = "email"
-          label    = "Email"
-          value    = {form.email}
-          error    = {form.errors?.email}
-          styles   = {inputStyle}
-          onChange = {onChange}
+          id           = "email"
+          type         = "email"
+          name         = "email"
+          label        = "Email"
+          defaultValue = {form.email}
+          error        = {form.errors?.email}
+          styles       = {inputStyle}
+          onChange     = {onChange}
         />
         <Input
-          id       = "password"
-          type     = "password"
-          name     = "password"
-          label    = "Password"
-          value    = {form.password}
-          error    = {form.errors?.password}
-          styles   = {inputStyle}
-          onChange = {onChange}
+          id           = "password"
+          type         = "password"
+          name         = "password"
+          label        = "Password"
+          defaultValue = {form.password}
+          error        = {form.errors?.password}
+          styles       = {inputStyle}
+          onChange     = {onChange}
         />
         
         <Button
-          typeBtn = {btnType.red}
-          type    = 'submit'
-          styles  = {{ root: s.buttonContainer }}
+          typeBtn  = {btnType.red}
+          type     = 'submit'
+          disabled = {loading}
+          styles   = {{ root: s.buttonContainer }}
         >
           Go
         </Button>
@@ -53,6 +58,7 @@ export const Login = ({ styles: s, form, onChange, onSubmit }) => {
 };
 
 Login.propTypes = {
+  loading  : pt.bool.isRequired,
   styles   : pt.shape().isRequired,
   form     : pt.shape({
     email          : pt.string,

@@ -1,5 +1,5 @@
-import * as LS from '../../utils/local-storage';
-import { CHARACTERS } from '../../assets/characters';
+import * as LS from '../../../utils/local-storage';
+import { CHARACTERS } from '../../../assets/characters';
 
 export const fillCharacters = () => {
   const LSLikes = LS.getCharactersLikes() || [];

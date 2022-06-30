@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import pt from 'prop-types';
 import cn from 'classnames';
 
 
-export const Input = ({ id, type, name, value, required, label, error, styles: s, onChange  }) => {
+export const Input = ({ id, type, name, defaultValue, required, label, error, styles: s, onChange  }) => {
+  const
+    ref = useRef(null),
+    [value, setValue] = useState(defaultValue || ``);
+  
+  
+  const handleChange = (e) => {
+    const v = ref.current.value;
+    setValue(v);
+    onChange && onChange({ [name]: v });
+  };
+
 
   return (
     <div className={s.root}>
@@ -11,9 +22,9 @@ export const Input = ({ id, type, name, value, required, label, error, styles: s
         id        = {id}
         type      = {type}
         name      = {name}
-        value     = {value}
+        ref       = {ref}
         required  = {required}
-        onChange  = {onChange}
+        onChange  = {handleChange}
       />
       <label htmlFor={id} className={cn({ [s.valid]: value.length > 0 })}>{label}</label>
       <div className={s.error}>{error}</div>

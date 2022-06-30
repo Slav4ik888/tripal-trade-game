@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import pt from 'prop-types';
-import * as LS from '../../utils/local-storage';
+import * as LS from '../../../utils/local-storage';
 import { fillCharacters, getLikes } from './utils';
 
 

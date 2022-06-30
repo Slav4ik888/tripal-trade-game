@@ -8,6 +8,11 @@
   align-items: center;
   font-size: 20px;
   transition: background 0.15s linear;
+
+  &:disabled {
+    cursor: progress;
+    opacity: .3;
+  }
 }
 
 .fullWidth {
