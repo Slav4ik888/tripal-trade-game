@@ -1,9 +1,11 @@
-import { useState } from 'react';
+// Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { decrement, increment, selectValue, incrementByAmount } from '../../store/counter';
 // Components
 import Heading from '../heading';
 import Container from '../container';
 import Button from '../btns/button';
-// Styles & Consts & Types
+// Types & Styles
 import logoPng from '../../assets/logo.png';
 import s from './index.module.scss';
 import { btnType } from '../../utils/types';
@@ -15,7 +17,13 @@ const bgStyle = {
   
 
 const Slider = () => {
-
+  const
+    dispatch     = useDispatch(),
+    counterValue = useSelector(selectValue);
+  
+  const handlerMinus = () => dispatch(decrement());
+  const handlerPlus = () => dispatch(increment());
+  const handlerAdd = () => dispatch(incrementByAmount(10));
 
   return (
     <section className={s.section}>
@@ -26,15 +34,26 @@ const Slider = () => {
           </Heading>
 
           <Heading level={2} black>
-            Wow.Wow.Wow
+            Wow.Wow.Wow - {counterValue}
           </Heading>
 
           <div className={s.image} style={bgStyle}>
             
           </div>
-          <Button typeBtn={btnType.white} onClick={() => { }}>
-            Wow
-          </Button>
+          <div className={s.buttons}>
+            <Button typeBtn={btnType.white} onClick={handlerMinus}>
+              -
+            </Button>
+            <Button typeBtn={btnType.white} onClick={() => {}}>
+              Wow
+            </Button>
+            <Button typeBtn={btnType.white} onClick={handlerPlus}>
+              +
+            </Button>
+            <Button typeBtn={btnType.white} onClick={handlerAdd}>
+              +10
+            </Button>
+          </div>
         </Container>
       </div>
     </section>

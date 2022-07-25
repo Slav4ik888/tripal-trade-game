@@ -55,12 +55,12 @@ export const removeStorageData = (storageName) => {
 
 
 export const names = {
-  charactersLikes: `charactersLikes`,
+  cards: `cards`,
   auth: `auth`
 };
 
-export const setCharactersLikes = (charactersLikes) => setStorageData(names.charactersLikes, charactersLikes);
-export const getCharactersLikes = () => getStorageData(names.charactersLikes);
-export const setAuth = (email) => setStorageData(names.auth, email);
-export const getAuth = () => getStorageData(names.auth);
+export const setCards  = (cards) => setStorageData(names.cards, cards);
+export const getCards  = () => getStorageData(names.cards);
+export const setAuth   = (email) => setStorageData(names.auth, email);
+export const getAuth   = () => getStorageData(names.auth);
 export const clearAuth = () => removeStorageData(names.auth);

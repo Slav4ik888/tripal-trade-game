@@ -13,9 +13,8 @@
 }
 
 .cardWrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  row-gap: 32px;
-  column-gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   margin-bottom: 12px;
 }

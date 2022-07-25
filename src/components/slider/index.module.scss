@@ -21,7 +21,7 @@
 .image {
   /* background: url(../../assets/logo.png) no-repeat; */
   width: 889px;
-  height: 500px;
+  height: 300px;
 }
 .image svg g {
   transition: all .25s ease-in-out;
@@ -30,7 +30,13 @@
   fill: pink;
 }
 
-// Button
+// Buttons
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
 .btnWhite {
   border: 1px solid white;
   color: white;

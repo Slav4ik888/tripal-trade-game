@@ -1,19 +1,42 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { Path } from '../../../utils/types';
 import pt from 'prop-types';
-import cl from 'classnames';
+// Router
+import { Link } from 'react-router-dom';
+import { btnType, Path } from '../../../utils/types';
 // Components
 import Heading from '../../heading';
 import Text from '../../text';
+import Button from '../../btns/button';
+// Functions
+import cl from 'classnames';
+import { useDeleteCharacterMutation, useUpdateCharacterMutation } from '../../../services/characters-api';
 // Styles
 import { ReactComponent as Like } from './assets/heart.svg';
 import s from './index.module.scss';
 
 
+
+const toggleUpdate = (name) => {
+  const idx = name.indexOf(`Updated`);
+  if (idx !== -1) return name.slice(0, idx)
+  return name + ` Updated`
+};
+
+
 function CharacterCard({ id, name, src, humanName, description, isLike, onLike }) {
 
+  const
+    [update] = useUpdateCharacterMutation(),
+    [del] = useDeleteCharacterMutation();
+
+  
   const handleClick = () => onLike && onLike(id);
+  const handlerUpdate = async () => {
+    console.log('toggleUpdate: ', toggleUpdate);
+    await update({ id, name: toggleUpdate(name) });
+  };
+
+  const handlerDelete = async () => await del({ id });
 
 
   return (
@@ -40,6 +63,11 @@ function CharacterCard({ id, name, src, humanName, description, isLike, onLike }
           <div className={s.readBio}>
             <Link to={`/${Path.CHARACTERS}/${id}`}>Read bio</Link>
           </div>
+        </div>
+
+        <div className={s.box}>
+          <Button typeBtn={btnType.black} onClick={handlerDelete}>Delete</Button>
+          <Button typeBtn={btnType.black} onClick={handlerUpdate}>Update</Button>
         </div>
       </div>
     </div>

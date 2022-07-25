@@ -5,10 +5,12 @@ import cn from 'classnames';
 import Heading from '../../components/heading';
 import Button from '../../components/btns/button';
 import Text from '../../components/text';
+// Functions
+import { useFetch } from '../../utils/hooks/use-fetch';
 // Styles & Consts & Types
 import s from './index.module.scss';
 import { ReactComponent as Anchor } from '../../assets/anchor.svg';
-import { BIO } from '../../assets/bio';
+// import { BIO } from '../../assets/bio';
 import { btnType, Path } from '../../utils/types';
 
 
@@ -17,7 +19,11 @@ export const BiographyPage = () => {
     navigate = useNavigate(),
     location = useLocation(),
     { id }   = useParams(),
-    content  = BIO[id];
+    [data, loading, error] = useFetch(`http://localhost:4000/bio/${id}`);
+  
+  console.log('id: ', id);
+  console.log('data: ', data);
+  
 
   
   const handleBack = () => navigate(`/`, {
@@ -34,22 +40,22 @@ export const BiographyPage = () => {
   const makeId = (item) => item?.text?.toLowerCase().replace(/\s/g, `-`) || '';
 
 
-  if (!content) return <Navigate to={`/${Path.CHARACTERS}`} replace />
+  // if (!data) return <Navigate to={`/${Path.CHARACTERS}`} replace />
 
   return (
     <div className={cn(s.root)}>
       <Button typeBtn={btnType.black} onClick={handleBack}>
         Go back
       </Button>
-      <div className={s.content}>
+      <div className={s.data}>
         {
-          content.map((item, idx) => {
+          data?.text?.map((item, idx) => {
             switch (item.type) {
               case `h1`: return <Heading
-                key={idx}
-                id={makeId(item)} 
-                onClick={handleAnchor}
-                children={
+                key      = {idx}
+                id       = {makeId(item)} 
+                onClick  = {handleAnchor}
+                children = {
                   <Link to={`#${makeId(item)}`} className={s.anchor}>
                     {`${item.text.toUpperCase()} `}
                     <Anchor />
@@ -58,12 +64,12 @@ export const BiographyPage = () => {
               />;
 
               case `h2`: return <Heading
-                key={idx}
-                id={makeId(item)}
-                level={2}
-                onClick={handleAnchor}
-                children={
-                  <Link to={`#${makeId(item)}`}  className={s.anchor}>
+                key      = {idx}
+                id       = {makeId(item)}
+                level    = {2}
+                onClick  = {handleAnchor}
+                children = {
+                  <Link to={`#${makeId(item)}`} className={s.anchor}>
                     {`${item.text.toUpperCase()} `}
                     <Anchor />
                   </Link>
